@@ -1,6 +1,6 @@
 
 from flask import render_template, url_for, flash, redirect
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 from main_site.forms import LoginForm
 from main_site.models import User
 from main_site import app
@@ -11,10 +11,12 @@ def home():
     return render_template('home.html', title='Home')
 
 @app.route('/pydash')
+@login_required
 def pydash():
     return render_template('dash.html', title='Dash')
 
 @app.route('/shiny')
+@login_required
 def shiny():
     return render_template('shiny.html', title='Shiny')
 
