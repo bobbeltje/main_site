@@ -1,7 +1,10 @@
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
+from forms import LoginForm
+from config import Config
 
 app = Flask(__name__)
+app.config.from_object(Config)
 
 @app.route('/')
 @app.route('/home')
@@ -24,6 +27,17 @@ def weather():
 def about():
     return render_template('about.html', title='About time')
 
-# to run the app without setting environmental variables
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = form.username.data
+        password = form.password.data
+        if user == 'bobbel' and  password == 'testing':
+            return redirect(url_for('home'))
+        else:
+            flash('Login unsuccessful. Please check username and password', 'danger')
+    return render_template('login.html', title='Login', form=form)
+
 if __name__ == '__main__':
     app.run(debug=True)
