@@ -1,6 +1,8 @@
 
 from flask import render_template, url_for, flash, redirect
+from flask_login import login_user, logout_user
 from main_site.forms import LoginForm
+from main_site.models import User
 from main_site import app
 
 @app.route('/')
@@ -28,11 +30,17 @@ def about():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = form.username.data
-        password = form.password.data
-        if user == 'bobbel' and  password == 'testing':
+        user = User()
+        cond_1 = form.username.data == user.username
+        cond_2 = form.password.data == user.password
+        if cond_1 and cond_2:
+            login_user(user)
             return redirect(url_for('home'))
         else:
             flash('Login unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
