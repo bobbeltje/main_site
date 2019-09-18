@@ -3,7 +3,7 @@ from flask import render_template, url_for, flash, redirect
 from flask_login import login_user, logout_user, login_required
 from main_site.forms import LoginForm
 from main_site.models import User
-from main_site import app
+from main_site import app, bcrypt
 
 @app.route('/')
 @app.route('/home')
@@ -34,7 +34,7 @@ def login():
     if form.validate_on_submit():
         user = User()
         cond_1 = form.username.data == user.username
-        cond_2 = form.password.data == user.password
+        cond_2 = bcrypt.check_password_hash(user.password, form.password.data)
         if cond_1 and cond_2:
             login_user(user)
             return redirect(url_for('home'))
