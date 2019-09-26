@@ -25,7 +25,7 @@
 	          <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
 	          {% if current_user.is_authenticated %}
 	            <a class="nav-item nav-link" href="{{ url_for('pydash') }}">Dash</a>
-		        <a class="nav-item nav-link" href="{{ url_for('shiny') }}">Shiny</a>
+		        <a class="nav-item nav-link" href="{{ url_for('rshiny') }}">Shiny</a>
 		        <a class="nav-item nav-link" href="{{ url_for('tmp') }}">Files</a>
 	          {% endif %}
 	          <a class="nav-item nav-link" href="{{ url_for('weather') }}">Weather</a>

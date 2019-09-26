@@ -15,9 +15,9 @@ def home():
 def pydash():
     return render_template('dash.html', title='Dash')
 
-@app.route('/shiny')
+@app.route('/rshiny')
 @login_required
-def shiny():
+def rshiny():
     return render_template('shiny.html', title='Shiny')
 
 @app.route('/tmp')
