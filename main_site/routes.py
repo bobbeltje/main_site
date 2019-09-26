@@ -20,6 +20,11 @@ def pydash():
 def shiny():
     return render_template('shiny.html', title='Shiny')
 
+@app.route('/tmp')
+@login_required
+def tmp():
+    return redirect('tmp/')
+
 @app.route('/weather')
 def weather():
     return render_template('weather.html', title='Weather')
