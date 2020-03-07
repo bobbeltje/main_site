@@ -15,6 +15,11 @@ def home():
 def pydash():
     return render_template('dash.html', title='Dash')
 
+@app.route('/phping')
+@login_required
+def phping():
+    return render_template('php.html', title='Php')
+
 @app.route('/rshiny')
 @login_required
 def rshiny():
